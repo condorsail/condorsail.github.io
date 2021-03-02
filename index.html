@@ -18,24 +18,25 @@
     <textarea id="mainbox" onchange="getCount">Quick, leave me behind! Start typing!</textarea>
     <p id='aomory'>Some text!</p>
     <script>
-        var label = document.getElementById('aomory');
         var textbox = document.getElementById('mainbox');
-        var deleted = -textbox.value.length
-        var removedWords = textbox.value.match(/(\w+)/g) != null ? -textbox.value.match(/(\w+)/g).length : -2;
+        var text = textbox.value
+        var label = document.getElementById('aomory');
+        var deleted = -text.length
+        var removedWords = text.match(/(\w+)/g) != null ? -text.match(/(\w+)/g).length : -2;
 
         var hadAWord = false;
         function getCount(event){
-            label.innerHTML = (textbox.value.match(/(\w+)/g).length + removedWords + ((hadAWord || textbox.value[0].match(/\w+/g) != null) ? 0 : 1)) + " | " + (textbox.value.length + deleted) + " | " + (textbox.value.length);
+            label.innerHTML = (text.match(/(\w+)/g).length + removedWords + ((hadAWord || text[0].match(/\w+/g) != null) ? 0 : 1)) + " | " + (text.length + deleted) + " | " + (text.length);
         };
 
         function removeFirstChar() {
             var removedChar = "";
-            if (textbox.value.length > 0) {
+            if (text.length > 0) {
                 deleted = deleted + 1
-                var removedChar = textbox.value[0];
-                var isWordChar = textbox.value[0].match(/\w+/g) != null;
+                var removedChar = text[0];
+                var isWordChar = text[0].match(/\w+/g) != null;
             }
-            textbox.value = textbox.value.substring(1);
+            textbox.value = text.substring(1);
             if (hadAWord == false && !isWordChar) {
                 hadAWord = true;
                 removedWords += 1;
